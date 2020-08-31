@@ -1,0 +1,103 @@
+#exercise 3.1
+from robot_control_class import RobotControl
+rc = RobotControl() 
+
+a = rc.get_laser(360)
+
+if a < 1: 
+    rc.stop_robot()
+else: 
+    rc.move_straight()
+print ("The value of the laser was: ", a)
+
+
+#exercise 3.2
+from robot_control_class import RobotControl
+
+rc = RobotControl()
+
+a = rc.get_laser(360)
+
+while a > 1:
+    rc.move_straight()
+    a = rc.get_laser(360)
+    print ("Current distance to wall: %f" % a)
+
+rc.stop_robot()
+
+print ("Stop, the wall is at %f meters" % a)
+
+
+#exercise 3.3
+from robot_control_class import RobotControl
+
+rc = RobotControl()
+
+l = rc.get_laser_full()
+
+maxim = 0
+
+for value in l:
+    if value > maxim:
+        maxim = value
+
+print ("The higher value in the list is: ", maxim)
+
+
+
+
+
+
+#exercise 4.1
+
+from robot_control_class import RobotControl
+import time
+
+rc = RobotControl()
+
+def move_x_seconds(secs):
+    rc.move_straight()
+    time.sleep(secs)
+    rc.stop_robot()
+
+
+move_x_seconds(5)
+
+
+#exercise 4.2 
+
+from robot_control_class import RobotControl
+
+rc = RobotControl()
+
+def get_laser_values(a,b,c):
+    r1 = rc.get_laser_summit(a)
+    r2 = rc.get_laser_summit(b)
+    r3 = rc.get_laser_summit(c)
+
+    return [r1, r2, r3]
+
+l = get_laser_values(0, 500, 1000)
+
+print ("reading 1 is: ", l[0])
+print ("reading 2 is: ", l[1])
+print ("reading 3 is: ", l[2])
+
+
+#exercise 4.3
+from robot_control_class import RobotControl
+
+rc = RobotControl()
+
+rc.move_straight_time("forward", 0.3, 5)
+rc.turn("clockwise", 0.3, 7)
+
+#exercise 4.4
+from robot_control_class import RobotControl
+
+rc = RobotControl()
+
+rc.turn("counter-clockwise", 0.4, 5)
+rc.move_straight_time("forward", 0.3, 7)
+rc.turn("counter-clockwise", 0.4, 6)
+rc.move_straight_time("forward", 0.3, 6)
